@@ -1,0 +1,2 @@
+manzana=Fruta del manzano
+melón=Fruta del melonero|Persona con pocas luces

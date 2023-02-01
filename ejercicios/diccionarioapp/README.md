@@ -66,3 +66,14 @@ Bendita inyeccion de dependencias
 com.curso.diccionario
 com.curso.diccionario.fichero
 con.curso.aplicacion
+
+---
+
+Funcion MAP
+
+funcion: ditancia de Levenstein
+
+Coleccion entrada       -> funcion -> Coleccion salida
+    hola                                        Sugerencia(3, hola)
+    amigo                                       Sugerencia(4, amigo)
+    manzana                                     Sugerencia(5, manzana)

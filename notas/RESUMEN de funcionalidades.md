@@ -102,4 +102,11 @@ Yo no elijo esa clase. Lo elige el que monta la clase y el interfaz.
 
 Para poder usar ANOTACIONES ! sin necesidad de especificar el tipo, haciendo más legible el código
 
-## ...
+## Métodos para por fin, de una vez por todas, 25 años despuñes, ALELUYA !!!! leer y escribir ficheros:
+
+- Files.readString()
+- Files.writeString()
+ 
+# Función string.lines()  
+
+Me devuelve un Stream con cada linea
