@@ -20,7 +20,7 @@ public class DiccionarioDesdeFichero implements Diccionario {
     }
     
     public boolean existe(String palabra){
-        return palabras.contains(Utilidades.normalizar(palabra));
+        return palabras.containsKey(Utilidades.normalizar(palabra));
     }
     
     public Optional<List<String>> getDefiniciones(String palabra){

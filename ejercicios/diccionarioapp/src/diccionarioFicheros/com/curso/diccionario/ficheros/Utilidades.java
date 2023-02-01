@@ -50,7 +50,7 @@ interface Utilidades {
         try{
             String contenidoDelFichero = Files.readString(Path.of(urlFicheroDiccionario.getFile()));    // J11
             return contenidoDelFichero.lines()                                                                   // Para cada linea
-                               .map(        linea -> line.split("=") )                                           // Parto por el igual
+                               .map(        linea -> linea.split("=") )                                           // Parto por el igual
                                .collect(    Collectors.toMap( partes -> normalizar(partes[0]),                               // Que uso en el map como clave
                                                               linea  -> Arrays.asList(partes[1].split("\\|")) )); // Que uso en el map como valor
         }catch(Exception e){
@@ -59,6 +59,6 @@ interface Utilidades {
     }
     
     static String normalizar(String palabra){
-        return palabra.toLowerCase(palabra);
+        return palabra.toLowerCase();
     }
 }
