@@ -14,7 +14,7 @@ public class App {
         
         String palabra = args[0];
         final String idioma  = args[1];
-        System.out.println("Buscando la palabra "+ palabra +" en el diccionario"+ idioma);
+        System.out.println("Buscando la palabra "+ palabra +" en el diccionario "+ idioma);
         
         SuministradorDeDiccionarios suministradorDeDiccionario = ServiceLoader.load(SuministradorDeDiccionarios.class)
                                                                               .iterator()
