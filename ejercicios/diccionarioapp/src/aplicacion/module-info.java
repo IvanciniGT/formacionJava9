@@ -1,0 +1,5 @@
+module aplicacion {
+    
+    requires diccionario;
+    
+}

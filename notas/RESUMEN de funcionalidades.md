@@ -92,6 +92,8 @@ Yo no elijo esa clase. Lo elige el que monta la clase y el interfaz.
 
 ## ...
 
+## Optional.orElseThrow() // Si el dato no está se genera en automático un NoSuchElementException
+
 # JAVA 11
 
 ## Posibilidad de ejecutar directamente archivos .java desde la máquina virtual

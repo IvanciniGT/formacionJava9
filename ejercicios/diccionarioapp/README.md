@@ -3,7 +3,7 @@ palabra existe en un determiando idioma.
 
 si la palabra existe, se muestran sus definiciones
 
-si la palabra no existe se muestran sugerencias de la misma
+si la palabra no existe se muestran sugerencias de la misma **** Os lo resulco ya: Algoritmo Levenstein
 
 ---
 
@@ -16,7 +16,7 @@ Y además, que a día de hoy voy a hacer una implemnetación de ello, que va a l
 de un fichero... y voy a utilizar un determinado algoritmo para identificar las sugerencias
 
 FICHERO PALABRAS.txt
-palabra=definicion1|definicion2|definicion3
+palabra=definicion1|definicion2|definicion3                 **** Ya os lo resolveré yo: Con 2 funcione nuevas de Java 11
 
 ---
 
