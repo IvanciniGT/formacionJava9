@@ -7,37 +7,39 @@ import java.util.Arrays;
 import java.util.List; 
 import java.util.Map; 
 import java.util.Objects; 
+import java.util.stream.Stream;
+import java.util.Collection;
 import java.util.stream.Collectors;
 
 interface Utilidades {
+    
+    public static final int DISTANCIA_MAXIMA   =  2;
+    public static final int MAXIMO_SUGERENCIAS = 10;
 
     static int distancia(String str1, String str2) {    // J1.8
-        return computeLevenshteinDistance(str1.toCharArray(),
-                                          str2.toCharArray());
+        if ( Math.abs(str1.length() - str2.length()) > DISTANCIA_MAXIMA ) return DISTANCIA_MAXIMA+2;
+        return distance(str1,str2);
     }
 
-    private static int minimum(int a, int b, int c) {   //J1.9
-         return Math.min(a, Math.min(b, c));
-    }
+    static final int [] costs_template = new int[]{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19}; //[b_length + 1];
 
-    private static int computeLevenshteinDistance(char [] str1, char [] str2) {   //J1.9
-        int [][] distance = new int[str1.length+1][str2.length+1];
-
-        for(int i=0;i<=str1.length;i++){
-                distance[i][0]=i;
-        }
-        for(int j=0;j<=str2.length;j++){
-                distance[0][j]=j;
-        }
-        for(int i=1;i<=str1.length;i++){
-            for(int j=1;j<=str2.length;j++){ 
-                  distance[i][j]= minimum(distance[i-1][j]+1,
-                                        distance[i][j-1]+1,
-                                        distance[i-1][j-1]+
-                                        ((str1[i-1]==str2[j-1])?0:1));
+    private static int distance(String a, String b) {
+        int b_length=b.length();
+        b_length=b_length<=20?b_length:20;
+        int a_length=a.length();
+        int [] costs = costs_template.clone(); //new int[][b_length + 1];
+        //for (int j = 0; j < costs.length; j++)
+        //    costs[j] = j;
+        for (int i = 1; i <= a_length; i++) {
+            costs[0] = i;
+            int nw = i - 1;
+            for (int j = 1; j <= b_length; j++) {
+                int cj = Math.min(1 + Math.min(costs[j], costs[j - 1]), a.charAt(i - 1) == b.charAt(j - 1) ? nw : nw + 1);
+                nw = costs[j];
+                costs[j] = cj;
             }
         }
-        return distance[str1.length][str2.length];
+        return costs[b.length()];
     }
     
     static Map<String,List<String>> cargarDiccionario(String idioma){
@@ -50,11 +52,17 @@ interface Utilidades {
         try{
             String contenidoDelFichero = Files.readString(Path.of(urlFicheroDiccionario.getFile()));    // J11
             return contenidoDelFichero.lines()                                                                   // Para cada linea
+                               .filter(     linea -> linea.trim().length()>0)
                                .map(        linea -> linea.split("=") )                                           // Parto por el igual
                                .collect(    Collectors.toMap( partes -> normalizar(partes[0]),                               // Que uso en el map como clave
-                                                              linea  -> Arrays.asList(partes[1].split("\\|")) )); // Que uso en el map como valor
+                                                              partes -> Arrays.asList(partes[1].split("\\|")) ,
+                                                              (definiciones1, definiciones2) -> 
+                                                                  Stream.of(definiciones1, definiciones2)
+                                                                  .flatMap(Collection::stream)
+                                                                  .collect(Collectors.toList())
+                                                              )); // Que uso en el map como valor
         }catch(Exception e){
-            throw new RuntimeException("Error al cargar el diccionario");
+            throw new RuntimeException("Error al cargar el diccionario",e);
         }
     }
     
