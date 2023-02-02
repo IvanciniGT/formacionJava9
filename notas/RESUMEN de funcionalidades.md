@@ -5,9 +5,31 @@
 
 # JAVA 1.8
 
+## Añadió un nuevo paquete para Date/Time
+
+Lo que había era un desastre:
+ long (Date) millis
+ sql.date < Z
+ Calendar   < GregorianCalendar
+
+JODA-TIME => API-JAVA
+
+LocalDate       Con fecha sin información zona horaria
+LocalDateTime   Con fecha/hora sin información de zona horaria
+
+ZonedDateTime   Fecha/hora con Información de zona horaria
+
+
+
+LocalDateTime Instant < long millis < Date / Calendar
+
+Date miFechaAntigua = ...
+LocalDateTime miInformacionHoraria = LocalDateTime.ofInstant( miFechaAntigua.getInstant() )
+
+
 ## Soporte a programación funcional
 
-- java.util.fucntion;
+- java.util.function;
 - Operador ::
 - Lambdas
 
@@ -33,7 +55,8 @@ Obligando a que el comportamiento de una función quede TOTALMENTE explicitado e
 ## Cambios en interfaces
 
 - Meter funciones estáticas públicas (con código, por estática no haría falta ni decirlo)
-- Meter funcions de instancia con código por defecto    "default"
+- Meter funcions de instancia con código por defecto    "default" > MANTENIBILIDAD 
+                                                                    EVOLUTIVOS
 
 # JAVA 9
 
@@ -90,7 +113,7 @@ Yo no elijo esa clase. Lo elige el que monta la clase y el interfaz.
 
 ## Uso de la palabra var
 
-## ...
+## Métodos .copyOf de las interfaces del paquete collecions
 
 ## Optional.orElseThrow() // Si el dato no está se genera en automático un NoSuchElementException
 
@@ -107,6 +130,21 @@ Para poder usar ANOTACIONES ! sin necesidad de especificar el tipo, haciendo má
 - Files.readString()
 - Files.writeString()
  
-# Función string.lines()  
+## Función string.lines()  Me devuelve un Stream con cada linea
+                .isBlank()
 
-Me devuelve un Stream con cada linea
+## Rediseño del paquete java.net.http
+
+Cliente de http
+
+- Peticiones http
+- Cliente WS
+
+
+La forma que tenemos ahora de crear un HTTPRequest o un WSClient en mediante un patron BUILDER
+
+HttpRequest miRequest = HttpRequest.newBuilder()
+                                    .uri("http://miservidor/miendpoint")
+                                    .POST()
+                                    .header("clave","valor")
+                                    .build();
